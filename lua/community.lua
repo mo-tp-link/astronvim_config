@@ -9,4 +9,5 @@ return {
   -- import/override with your plugins folder
   { import = "astrocommunity.colorscheme.catppuccin" },
   { import = "astrocommunity.colorscheme.nordic-nvim" },
+  { import = "astrocommunity.recipes.picker-nvchad-theme" },
 }

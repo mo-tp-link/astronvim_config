@@ -83,4 +83,59 @@ return {
       )
     end,
   },
+  {
+    "echasnovski/mini.indentscope",
+    branch = "stable",
+    -- event = { "BufReadPre" },
+    config = function() require("mini.indentscope").setup() end,
+  },
+  {
+    "echasnovski/mini.surround",
+    version = "*",
+    event = { "BufReadPre" },
+    config = function() require("mini.surround").setup() end,
+  },
+  {
+    "echasnovski/mini.trailspace",
+    branch = "stable",
+    event = { "BufEnter" },
+    config = function() require("mini.trailspace").setup() end,
+  },
+  {
+    "echasnovski/mini.move",
+    branch = "stable",
+    event = { "BufEnter" },
+    config = function() require("mini.move").setup() end,
+  },
+  {
+    "mg979/vim-visual-multi",
+    branch = "master",
+    event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+  },
+
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+    opts = {},
+  },
+  {
+    "cameron-wags/rainbow_csv.nvim",
+    config = function() require("rainbow_csv").setup() end,
+    ft = {
+      "csv",
+      "tsv",
+      "csv_semicolon",
+      "csv_whitespace",
+      "csv_pipe",
+      "rfc_csv",
+      "rfc_semicolon",
+    },
+    cmd = {
+      "RainbowDelim",
+      "RainbowDelimSimple",
+      "RainbowDelimQuoted",
+      "RainbowMultiDelim",
+    },
+  },
 }
