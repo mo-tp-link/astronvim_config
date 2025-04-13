@@ -2,6 +2,10 @@ return {
   { -- further customize the options set by the community
     "nordic.nvim",
     opts = {
+      transparent = {
+        bg = false,
+      },
+      --
       --   integrations = {
       --     sandwich = false,
       --     noice = true,

@@ -8,8 +8,9 @@ return {
     "mfussenegger/nvim-dap-python",
   },
   keys = {
-    { "<leader>zs", "<cmd>VenvSelect<cr>" },
-    { "<leader>zc", "<cmd>VenvSelectCached<cr>" },
+    { "<leader>fe", desc = "EnvSelect" },
+    { "<leader>fee", "<cmd>VenvSelect<cr>", desc = "VenvSelect" },
+    { "<leader>fec", "<cmd>VenvSelectCached<cr>", desc = "VenvSelectCached" },
   },
   opts = {
     settings = {

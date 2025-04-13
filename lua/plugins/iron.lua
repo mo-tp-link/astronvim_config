@@ -1,5 +1,6 @@
 return {
   "hkupty/iron.nvim",
+  keys = { { "<Leader>iI", "<cmd>IronRepl<cr>", desc = "Iron" } },
   config = function()
     local iron = require "iron.core"
     local view = require "iron.view"

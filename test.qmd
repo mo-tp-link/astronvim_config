@@ -4,6 +4,7 @@
 ```{python} 
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 t = np.linspace(-10, 10, 100)
 sig = 1 / (1 + np.exp(-t))
 
@@ -11,6 +12,5 @@ fig, ax = plt.subplots()
 
 ax.plot(t, sig, linewidth=2, label=r"$\sigma(t) = \frac{1}{1 + e^{-t}}$")
 plt.show()
-
 
 ```
