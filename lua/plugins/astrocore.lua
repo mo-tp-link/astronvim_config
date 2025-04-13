@@ -43,11 +43,29 @@ return {
         spell = false, -- sets vim.opt.spell
         signcolumn = "yes", -- sets vim.opt.signcolumn to yes
         wrap = false, -- sets vim.opt.wrap
+        cursorlineopt = "both", -- to enable cursorline!
+        shiftwidth = 4,
+        tabstop = 4,
+        softtabstop = 4,
+        clipboard = "unnamedplus",
+        foldlevel = 99,
       },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)
         -- NOTE: `mapleader` and `maplocalleader` must be set in the AstroNvim opts or before `lazy.setup`
         -- This can be found in the `lua/lazy_setup.lua` file
+        clipboard = {
+          name = "WslClipboard",
+          copy = {
+            ["+"] = "clip.exe",
+            ["*"] = "clip.exe",
+          },
+          paste = {
+            ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+            ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+          },
+          cache_enabled = 0,
+        },
       },
     },
     -- Mappings can be configured through AstroCore as well.

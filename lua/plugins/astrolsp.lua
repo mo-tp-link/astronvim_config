@@ -91,41 +91,41 @@ return {
             return client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens ~= nil
           end,
         },
-        ["<leader>lr"] = {
-          function() vim.lsp.buf.rename() end,
-          desc = "LSP Rename",
-          cond = "textDocument/rename",
-        },
-        ["<leader>lt"] = {
-          function() vim.lsp.buf.type_definition() end,
-          desc = "LSP Type Definition",
-          cond = "textDocument/typeDefinition",
-        },
-        ["<leader>la"] = {
-          function() vim.lsp.buf.code_action() end,
-          desc = "LSP Code Action",
-          cond = "textDocument/codeAction",
-        },
-        ["<leader>lD"] = {
-          function() vim.lsp.buf.declaration() end,
-          desc = "LSP Declaration",
-          cond = "textDocument/declaration",
-        },
-        ["<leader>ld"] = {
-          function() vim.lsp.buf.definition() end,
-          desc = "LSP Definition",
-          cond = "textDocument/definition",
-        },
-        ["<leader>li"] = {
-          function() vim.lsp.buf.implementation() end,
-          desc = "LSP Implementation",
-          cond = "textDocument/implementation",
-        },
-        ["<leader>lR"] = {
-          function() vim.lsp.buf.references() end,
-          desc = "LSP References",
-          cond = "textDocument/references",
-        },
+        -- ["<leader>lr"] = {
+        --   function() vim.lsp.buf.rename() end,
+        --   desc = "LSP Rename",
+        --   cond = "textDocument/rename",
+        -- },
+        -- ["<leader>lt"] = {
+        --   function() vim.lsp.buf.type_definition() end,
+        --   desc = "LSP Type Definition",
+        --   cond = "textDocument/typeDefinition",
+        -- },
+        -- ["<leader>la"] = {
+        --   function() vim.lsp.buf.code_action() end,
+        --   desc = "LSP Code Action",
+        --   cond = "textDocument/codeAction",
+        -- },
+        -- ["<leader>lD"] = {
+        --   function() vim.lsp.buf.declaration() end,
+        --   desc = "LSP Declaration",
+        --   cond = "textDocument/declaration",
+        -- },
+        -- ["<leader>ld"] = {
+        --   function() vim.lsp.buf.definition() end,
+        --   desc = "LSP Definition",
+        --   cond = "textDocument/definition",
+        -- },
+        -- ["<leader>li"] = {
+        --   function() vim.lsp.buf.implementation() end,
+        --   desc = "LSP Implementation",
+        --   cond = "textDocument/implementation",
+        -- },
+        -- ["<leader>lR"] = {
+        --   function() vim.lsp.buf.references() end,
+        --   desc = "LSP References",
+        --   cond = "textDocument/references",
+        -- },
       },
     },
     -- A custom `on_attach` function to be run after the default `on_attach` function
