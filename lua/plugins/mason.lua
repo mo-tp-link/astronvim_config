@@ -27,9 +27,10 @@ return {
 
         -- python
         "debugpy",
-        "flake8",
         "black",
-        "python-lsp-server",
+        -- "jedi-language-server",
+        -- "python-lsp-server",
+        "pyright",
         "debugpy",
         -- install any other package
         "tree-sitter-cli",

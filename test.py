@@ -1,3 +1,5 @@
+import time
+from datetime import datetime
 from functools import lru_cache
 
 some_lsit = [
@@ -10,3 +12,5 @@ some_lsit = [
     "B",
     "B",
 ]
+
+datetime(year=2024, month=12, day=5)
