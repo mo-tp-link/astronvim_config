@@ -12,5 +12,5 @@ some_lsit = [
     "B",
     "B",
 ]
-
+some_lsit.append("C")
 datetime(year=2024, month=12, day=5)

@@ -11,7 +11,11 @@ return {
         close_on_exit = true,
         focus_on_send = false,
         repl_auto_scroll = true,
-        repl_open_cmd = view.split.vertical.botright "50%",
+        repl_open_cmd = view.split.vertical.botright("50%", {
+          winfixwidth = false,
+          winfixheight = false,
+        }),
+
         -- Your repl definitions come here
         repl_definition = {
           sh = {
