@@ -1,9 +1,5 @@
 return {
   "quarto-dev/quarto-nvim",
-  dev = false,
-  dependencies = {
-    "jmbuhr/otter.nvim",
-  },
   ft = { "quarto" },
   opts = {
     debug = false,

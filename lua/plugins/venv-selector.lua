@@ -7,6 +7,7 @@ return {
     "nvim-telescope/telescope.nvim",
     "mfussenegger/nvim-dap-python",
   },
+  ft = { "python" },
   keys = {
     { "<leader>fe", desc = "EnvSelect" },
     { "<leader>fee", "<cmd>VenvSelect<cr>", desc = "VenvSelect" },
