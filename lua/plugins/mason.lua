@@ -14,10 +14,23 @@ return {
 
         -- install formatters
         "stylua",
+        "bash-language-server",
+        "clangd",
+        "css-lsp",
+        "cmake-language-server",
+        "dockerfile-language-server",
+        "html-lsp",
+        "json-lsp",
+        "sqlls",
+        "eslint-lsp",
+        "marksman",
 
-        -- install debuggers
+        -- python
         "debugpy",
-
+        "flake8",
+        "black",
+        "python-lsp-server",
+        "debugpy",
         -- install any other package
         "tree-sitter-cli",
       },

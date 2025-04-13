@@ -30,7 +30,7 @@ return {
         -- disable lua_ls formatting capability if you want to use StyLua to format your lua code
         -- "lua_ls",
       },
-      timeout_ms = 1000, -- default format timeout
+      timeout_ms = 3200, -- default format timeout
       -- filter = function(client) -- fully override the default formatting function
       --   return true
       -- end
@@ -79,17 +79,52 @@ return {
     mappings = {
       n = {
         -- a `cond` key can provided as the string of a server capability to be required to attach, or a function with `client` and `bufnr` parameters from the `on_attach` that returns a boolean
-        gD = {
-          function() vim.lsp.buf.declaration() end,
-          desc = "Declaration of current symbol",
-          cond = "textDocument/declaration",
-        },
-        ["<Leader>uY"] = {
+        -- gD = {
+        --   function() vim.lsp.buf.declaration() end,
+        --   desc = "Declaration of current symbol",
+        --   cond = "textDocument/declaration",
+        -- },
+        ["<Leader>lY"] = {
           function() require("astrolsp.toggles").buffer_semantic_tokens() end,
           desc = "Toggle LSP semantic highlight (buffer)",
           cond = function(client)
             return client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens ~= nil
           end,
+        },
+        ["<leader>lr"] = {
+          function() vim.lsp.buf.rename() end,
+          desc = "LSP Rename",
+          cond = "textDocument/rename",
+        },
+        ["<leader>lt"] = {
+          function() vim.lsp.buf.type_definition() end,
+          desc = "LSP Type Definition",
+          cond = "textDocument/typeDefinition",
+        },
+        ["<leader>la"] = {
+          function() vim.lsp.buf.code_action() end,
+          desc = "LSP Code Action",
+          cond = "textDocument/codeAction",
+        },
+        ["<leader>lD"] = {
+          function() vim.lsp.buf.declaration() end,
+          desc = "LSP Declaration",
+          cond = "textDocument/declaration",
+        },
+        ["<leader>ld"] = {
+          function() vim.lsp.buf.definition() end,
+          desc = "LSP Definition",
+          cond = "textDocument/definition",
+        },
+        ["<leader>li"] = {
+          function() vim.lsp.buf.implementation() end,
+          desc = "LSP Implementation",
+          cond = "textDocument/implementation",
+        },
+        ["<leader>lR"] = {
+          function() vim.lsp.buf.references() end,
+          desc = "LSP References",
+          cond = "textDocument/references",
         },
       },
     },
