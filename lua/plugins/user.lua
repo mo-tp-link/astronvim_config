@@ -13,8 +13,10 @@ return {
   -- == Examples of Overriding Plugins ==
   {
     "folke/snacks.nvim",
+    -- enabled = false,
     opts = {
       dashboard = {
+        enabled = false,
         preset = {
           header = table.concat({
             " █████  ███████ ████████ ██████   ██████ ",
@@ -33,9 +35,8 @@ return {
       },
     },
   },
-
   -- You can disable default plugins as follows:
-  { "max397574/better-escape.nvim", enabled = false },
+  { "max397574/better-escape.nvim", enabled = true },
 
   -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
   {
@@ -131,5 +132,30 @@ return {
       "RainbowDelimQuoted",
       "RainbowMultiDelim",
     },
+  },
+  {
+    "everviolet/nvim",
+    name = "evergarden",
+    priority = 1000, -- Colorscheme plugin is loaded first before any other plugins
+    opts = {
+      theme = {
+        variant = "fall", -- 'winter'|'fall'|'spring'|'summer'
+        accent = "green",
+      },
+      editor = {
+        transparent_background = false,
+        sign = { color = "none" },
+        float = {
+          color = "mantle",
+          invert_border = false,
+        },
+        completion = {
+          color = "surface0",
+        },
+      },
+    },
+  },
+  {
+    "tpope/vim-dadbod",
   },
 }

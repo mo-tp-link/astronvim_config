@@ -45,6 +45,8 @@ return {
       -- Iron doesn't set keymaps by default anymore.
       -- You can set them here or manually add keymaps to the functions in iron.core
       keymaps = {
+
+        restart_repl = "<leader>iR", -- calls `IronRestart` to restart the repl
         toggle_repl = "<leader>ii",
         send_motion = "<leader>is",
         visual_send = "<leader>is",

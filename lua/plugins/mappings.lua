@@ -7,20 +7,45 @@ return {
       -- NOTE: keycodes follow the casing in the vimdocs. For example, `<Leader>` must be capitalized
       mappings = {
         -- first key is the mode
+        t = {
+          ["<esc>"] = { [[<C-\><C-n>]], desc = "Exit terminal mode" },
+          ["jk"] = { [[<C-\><C-n>]], desc = "Exit terminal mode" },
+          ["<A-i>"] = { "<Cmd>ToggleTerm<CR>", desc = "Toggle terminal" },
+          ["<C-'>"] = { "<Cmd>ToggleTerm<CR>", desc = "Toggle terminal" },
+        },
         i = {
           ["jk"] = { "<ESC>", desc = "Escape insert mode" },
+          ["<M-h>"] = { "<Left>", desc = "move left", noremap = true },
+          ["<M-l>"] = { "<Right>", desc = "move right", noremap = true },
+          ["<M-j>"] = { "<Down>", desc = "move down", noremap = true },
+          ["<M-k>"] = { "<Up>", desc = "move up", noremap = true },
+          ["<A-i>"] = { "<Esc><Cmd>ToggleTerm<CR>", desc = "Toggle terminal" },
         },
         n = {
+          ["<Leader>Q"] = false,
+          ["<Leader>h"] = false,
           -- second key is the lefthand side of the map
+          ["<A-i>"] = { '<Cmd>execute v:count . "ToggleTerm"<CR>', desc = "Toggle terminal" },
+          ["<C-'>"] = { '<Cmd>execute v:count . "ToggleTerm"<CR>', desc = "Toggle terminal" },
+          ["<Leader>q"] = { desc = "Quarto", noremap = true },
+          ["<Leader>i"] = { desc = "Iron", noremap = true },
 
-          ["<Leader>q"] = { desc = "Quarto" },
-          ["<Leader>i"] = { desc = "Iron" },
+          ["<Leader>qp"] = { "<cmd>QuartoPreview<cr>", desc = "Quarto Preview", silent = true },
+          ["<Leader>qq"] = { "<cmd>QuartoClosePreview<cr>", desc = "Close Quarto Preview", silent = true },
+          ["<Leader>qh"] = { "<cmd>QuartoHelp<cr>", desc = "Quarto Help", silent = true },
+          ["<Leader>qd"] = { "<cmd>QuartoDiagnostics<cr>", desc = "Quarto Diagnostics", silent = true },
+          -- Quarto code execution
+          ["<Leader>qs"] = { "<cmd>QuartoSend<cr>", desc = "Run cell", silent = true },
+          ["<Leader>qa"] = { "<cmd>QuartoSendAbove<cr>", desc = "Run cell and above", silent = true },
+          ["<Leader>qb"] = { "<cmd>QuartoSendBelow<cr>", desc = "Run cell and below", silent = true },
+          ["<Leader>qA"] = { "<cmd>QuartoSendAll<cr>", desc = "Run all cells", silent = true },
+          ["<Leader>ql"] = { "<cmd>QuartoSendLine<cr>", desc = "Run line", silent = true },
           -- -- navigate buffer tabs
           ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
           ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
 
-          -- -- mappings seen under group name "Buffer"
-          -- ["<Leader>bd"] = {
+          -- mappings seen under group name "Buffer"
+          -- ["<Leader>bq"] = {
           --   function()
           --     require("astroui.status.heirline").buffer_picker(
           --       function(bufnr) require("astrocore.buffer").close(bufnr) end
@@ -31,7 +56,18 @@ return {
           -- tables with just a `desc` key will be registered with which-key if it's installed
           -- this is useful for naming menus
           ["<Leader>b"] = { desc = "Buffers" },
-
+          ["<Leader>bd"] = false,
+          ["<Leader>bc"] = false,
+          ["<Leader>c"] = false,
+          ["<Leader>C"] = false,
+          ["<Leader>bq"] = {
+            function() require("astrocore.buffer").close() end,
+            desc = "Close buffer from tabline",
+          },
+          ["<Leader>bo"] = {
+            function() require("astrocore.buffer").close_all(true) end,
+            desc = "Close buffer from tabline",
+          },
           -- setting a mapping to false will disable it
           -- ["<C-S>"] = false,
         },
@@ -58,11 +94,12 @@ return {
               return client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens ~= nil
             end,
           },
-          -- ["<leader>lr"] = {
-          --   function() vim.lsp.buf.rename() end,
-          --   desc = "LSP Rename",
-          --   cond = "textDocument/rename",
-          -- },
+          -- Use a decalared symbol
+          ["<leader>lr"] = {
+            function() vim.lsp.buf.rename() end,
+            desc = "LSP Rename",
+            cond = "textDocument/rename",
+          },
           -- ["<leader>lt"] = {
           --   function() vim.lsp.buf.type_definition() end,
           --   desc = "LSP Type Definition",
@@ -73,26 +110,28 @@ return {
           --   desc = "LSP Code Action",
           --   cond = "textDocument/codeAction",
           -- },
-          -- ["<leader>lD"] = {
-          --   function() vim.lsp.buf.declaration() end,
-          --   desc = "LSP Declaration",
-          --   cond = "textDocument/declaration",
-          -- },
-          -- ["<leader>ld"] = {
-          --   function() vim.lsp.buf.definition() end,
-          --   desc = "LSP Definition",
-          --   cond = "textDocument/definition",
-          -- },
-          -- ["<leader>li"] = {
+          --  Declaration is first define a symbol
+          ["<leader>lD"] = {
+            function() vim.lsp.buf.declaration() end,
+            desc = "LSP Declaration",
+            cond = "textDocument/declaration",
+          },
+          --  Definition is you define a value for a symbol
+          ["<leader>ld"] = {
+            function() vim.lsp.buf.definition() end,
+            desc = "LSP Definition",
+            cond = "textDocument/definition",
+          },
+          -- ["<leader>lm"] = {
           --   function() vim.lsp.buf.implementation() end,
           --   desc = "LSP Implementation",
           --   cond = "textDocument/implementation",
           -- },
-          -- ["<leader>lR"] = {
-          --   function() vim.lsp.buf.references() end,
-          --   desc = "LSP References",
-          --   cond = "textDocument/references",
-          -- },
+          ["<leader>lR"] = {
+            function() vim.lsp.buf.references() end,
+            desc = "LSP References",
+            cond = "textDocument/references",
+          },
         },
       },
     },

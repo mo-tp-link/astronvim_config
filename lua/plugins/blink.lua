@@ -3,6 +3,11 @@ return {
   "Saghen/blink.cmp",
   opts = {
     -- Custom keymaps based on your nvim-cmp configuration
+    completion = {
+      list = { selection = { preselect = true } },
+      ghost_text = { enabled = false },
+    },
+
     keymap = {
       preset = "none",
       -- Navigation
@@ -45,42 +50,9 @@ return {
         "path",
         "snippets",
         "buffer",
-        "omni",
-        -- "calc",
-        -- "otter",
-        -- "pandoc_references",
-        -- "spell",
-        -- "treesitter",
-        -- "latex_symbols",
-        -- "emoji",
-        -- "obsidian",
+        -- "omni",
       },
-      -- providers = {
-      --   -- Configure each provider with options corresponding to your current setup
-      --   otter = {
-      --     filetypes = { "qmd" },
-      --   },
-      --   lsp = {
-      --     score_offset = 0, -- Higher priority
-      --   },
-      --   snippets = {
-      --     keyword_length = 3,
-      --     max_item_count = 3,
-      --     score_offset = -1,
-      --   },
-      --   buffer = {
-      --     keyword_length = 5,
-      --     max_item_count = 3,
-      --     score_offset = -3, -- Lower priority
-      --   },
-      --   treesitter = {
-      --     keyword_length = 5,
-      --     max_item_count = 3,
-      --   },
-      --   obsidian = {
-      --     filetypes = { "md" },
-      --   },
-      -- },
+      providers = {},
     },
     --   -- For compatibility with any nvim-cmp sources you're using
     -- specs = {

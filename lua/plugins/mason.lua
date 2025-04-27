@@ -24,6 +24,7 @@ return {
         "sqlls",
         "eslint-lsp",
         "marksman",
+        "prettier",
 
         -- python
         "debugpy",
