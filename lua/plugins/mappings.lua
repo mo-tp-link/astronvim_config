@@ -15,15 +15,19 @@ return {
         },
         i = {
           ["jk"] = { "<ESC>", desc = "Escape insert mode" },
-          ["<M-h>"] = { "<Left>", desc = "move left", noremap = true },
-          ["<M-l>"] = { "<Right>", desc = "move right", noremap = true },
-          ["<M-j>"] = { "<Down>", desc = "move down", noremap = true },
-          ["<M-k>"] = { "<Up>", desc = "move up", noremap = true },
+          ["<C-h>"] = { "<Left>", desc = "move left", noremap = true },
+          ["<C-l>"] = { "<Right>", desc = "move right", noremap = true },
+          ["<C-j>"] = { "<Down>", desc = "move down", noremap = true },
+          ["<C-k>"] = { "<Up>", desc = "move up", noremap = true },
           ["<A-i>"] = { "<Esc><Cmd>ToggleTerm<CR>", desc = "Toggle terminal" },
         },
         n = {
           ["<Leader>Q"] = false,
           ["<Leader>h"] = false,
+          ["<Leader>w"] = false,
+          ["<Leader>R"] = false,
+          ["<Leader>n"] = false,
+          ["<Leader>o"] = false,
           -- second key is the lefthand side of the map
           ["<A-i>"] = { '<Cmd>execute v:count . "ToggleTerm"<CR>', desc = "Toggle terminal" },
           ["<C-'>"] = { '<Cmd>execute v:count . "ToggleTerm"<CR>', desc = "Toggle terminal" },

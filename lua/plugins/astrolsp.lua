@@ -43,6 +43,7 @@ return {
     ---@diagnostic disable: missing-fields
     config = {
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
+      marksman = { filetypes = { "markdown", "quarto", "qmd" } },
     },
     -- customize how language servers are attached
     handlers = {
@@ -58,6 +59,7 @@ return {
     on_attach = function(client, bufnr)
       -- this would disable semanticTokensProvider for all clients
       -- client.server_capabilities.semanticTokensProvider = nil
+      --
     end,
   },
 }

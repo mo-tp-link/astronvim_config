@@ -78,24 +78,24 @@ return {
       )
     end,
   },
-  {
-    "echasnovski/mini.indentscope",
-    branch = "stable",
-    -- event = { "BufReadPre" },
-    config = function() require("mini.indentscope").setup() end,
-  },
+  -- {
+  --   "echasnovski/mini.indentscope",
+  --   branch = "stable",
+  --   -- event = { "BufReadPre" },
+  --   config = function() require("mini.indentscope").setup() end,
+  -- },
   {
     "echasnovski/mini.surround",
     version = "*",
     event = { "BufReadPre" },
     config = function() require("mini.surround").setup() end,
   },
-  {
-    "echasnovski/mini.trailspace",
-    branch = "stable",
-    event = { "BufEnter" },
-    config = function() require("mini.trailspace").setup() end,
-  },
+  -- {
+  --   "echasnovski/mini.trailspace",
+  --   branch = "stable",
+  --   event = { "BufEnter" },
+  --   config = function() require("mini.trailspace").setup() end,
+  -- },
   {
     "echasnovski/mini.move",
     branch = "stable",
@@ -131,28 +131,6 @@ return {
       "RainbowDelimSimple",
       "RainbowDelimQuoted",
       "RainbowMultiDelim",
-    },
-  },
-  {
-    "everviolet/nvim",
-    name = "evergarden",
-    priority = 1000, -- Colorscheme plugin is loaded first before any other plugins
-    opts = {
-      theme = {
-        variant = "fall", -- 'winter'|'fall'|'spring'|'summer'
-        accent = "green",
-      },
-      editor = {
-        transparent_background = false,
-        sign = { color = "none" },
-        float = {
-          color = "mantle",
-          invert_border = false,
-        },
-        completion = {
-          color = "surface0",
-        },
-      },
     },
   },
   {

@@ -27,12 +27,11 @@ return {
         "prettier",
 
         -- python
-        "debugpy",
         "black",
         -- "jedi-language-server",
         -- "python-lsp-server",
         "pyright",
-        "debugpy",
+        -- "debugpy",
         -- install any other package
         "tree-sitter-cli",
       },
