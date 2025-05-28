@@ -33,12 +33,12 @@ return {
           python = {
             command = { "ipython", "--no-autoindent" },
             format = python_format,
-            block_deviders = { "# %%", "#%%" },
+            block_dividers = { "# %%", "#%%" },
           },
           quarto = {
             command = { "ipython", "--no-autoindent" },
             format = python_format,
-            block_deviders = { "# %%", "#%%" },
+            block_dividers = { "# %%", "#%%" },
           },
         },
       },

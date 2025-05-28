@@ -23,6 +23,7 @@ return {
         },
         n = {
           ["<Leader>Q"] = false,
+          -- ["<Leader>q"] = false,
           ["<Leader>h"] = false,
           ["<Leader>w"] = false,
           ["<Leader>R"] = false,
@@ -31,8 +32,10 @@ return {
           -- second key is the lefthand side of the map
           ["<A-i>"] = { '<Cmd>execute v:count . "ToggleTerm"<CR>', desc = "Toggle terminal" },
           ["<C-'>"] = { '<Cmd>execute v:count . "ToggleTerm"<CR>', desc = "Toggle terminal" },
-          ["<Leader>q"] = { desc = "Quarto", noremap = true },
-          ["<Leader>i"] = { desc = "Iron", noremap = true },
+          -- ["<Leader>q"] = { desc = "Quarto", noremap = true },
+
+          ["<Leader>q"] = { "<Nop>", desc = "Quarto", noremap = true },
+          ["<Leader>i"] = { "<Nop>", desc = "Iron", noremap = true },
 
           ["<Leader>qp"] = { "<cmd>QuartoPreview<cr>", desc = "Quarto Preview", silent = true },
           ["<Leader>qq"] = { "<cmd>QuartoClosePreview<cr>", desc = "Close Quarto Preview", silent = true },

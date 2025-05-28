@@ -1,6 +1,7 @@
 -- lua/plugins/blink.lua
 return {
   "Saghen/blink.cmp",
+  event = "InsertEnter",
   opts = {
     -- Custom keymaps based on your nvim-cmp configuration
     completion = {
