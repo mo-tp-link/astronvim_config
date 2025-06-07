@@ -1,6 +1,6 @@
 return {
   "folke/trouble.nvim",
-  enabled = false,
+  enabled = true,
   event = "BufEnter",
   opts = {
     modes = {
