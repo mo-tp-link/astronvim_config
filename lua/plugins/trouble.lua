@@ -7,6 +7,7 @@ return {
       mydiags = {
         mode = "diagnostics",
         auto_open = true,
+        -- auto_close = true,
         win = {
           position = "bottom", -- Set window position to right
           size = { height = 7 },
