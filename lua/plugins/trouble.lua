@@ -1,6 +1,6 @@
 return {
   "folke/trouble.nvim",
-  enabled = true,
+  -- enabled = false,
   event = "BufEnter",
   opts = {
     modes = {
@@ -24,4 +24,11 @@ return {
       },
     },
   },
+  config = function(_, opts)
+    require("trouble").setup(opts)
+
+    -- Override highlight groups
+    vim.api.nvim_set_hl(0, "TroubleNormal", { bg = "none" })
+    vim.api.nvim_set_hl(0, "TroubleNormalNC", { bg = "none" })
+  end,
 }
