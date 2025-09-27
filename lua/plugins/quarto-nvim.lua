@@ -1,6 +1,7 @@
 return {
   "quarto-dev/quarto-nvim",
   ft = { "quarto" },
+  -- enabled = true,
   opts = {
     debug = false,
     closePreviewOnExit = true,

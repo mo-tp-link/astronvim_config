@@ -31,10 +31,18 @@ return {
             end,
           },
           python = {
-            command = { "ipython", "--no-autoindent" },
+            command = {
+              "ipython",
+              "--no-autoindent",
+            },
             format = python_format,
             block_dividers = { "# %%", "#%%" },
           },
+          -- python = {
+          --   command = { "jupyter-console" },
+          --   format = require("iron.fts.common").bracketed_paste,
+          --   block_deviders = { "# %%", "#%%" },
+          -- },
           quarto = {
             command = { "ipython", "--no-autoindent" },
             format = python_format,

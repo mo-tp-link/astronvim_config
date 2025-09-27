@@ -43,7 +43,7 @@ return {
     "AstroNvim/astrolsp",
     ---@type AstroLSPOpts
     opts = {
-      autocmds= {
+      automcds = {
         -- these autocommands will only be created in buffers where
         -- a language servers attaches
         lsp_codelens_refresh = {
