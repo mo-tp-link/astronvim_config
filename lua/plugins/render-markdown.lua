@@ -13,42 +13,41 @@ local function set_markdown_highlights()
   vim.api.nvim_set_hl(0, "@markup.heading.5.markdown", { fg = "#E777FA", bold = true })
   vim.api.nvim_set_hl(0, "@markup.heading.6.markdown", { fg = "#FB9D46", bold = true })
   -- Remove background highlight completely
---   vim.api.nvim_set_hl(0, "RenderMarkdownH1Bg", { bg = "NONE" })
---   vim.api.nvim_set_hl(0, "RenderMarkdownH2Bg", { bg = "NONE" })
---   vim.api.nvim_set_hl(0, "RenderMarkdownH3Bg", { bg = "NONE" })
---   vim.api.nvim_set_hl(0, "RenderMarkdownH4Bg", { bg = "NONE" })
---   vim.api.nvim_set_hl(0, "RenderMarkdownH5Bg", { bg = "NONE" })
---   vim.api.nvim_set_hl(0, "RenderMarkdownH6Bg", { bg = "NONE" })
---   -- Font
+  --   vim.api.nvim_set_hl(0, "RenderMarkdownH1Bg", { bg = "NONE" })
+  --   vim.api.nvim_set_hl(0, "RenderMarkdownH2Bg", { bg = "NONE" })
+  --   vim.api.nvim_set_hl(0, "RenderMarkdownH3Bg", { bg = "NONE" })
+  --   vim.api.nvim_set_hl(0, "RenderMarkdownH4Bg", { bg = "NONE" })
+  --   vim.api.nvim_set_hl(0, "RenderMarkdownH5Bg", { bg = "NONE" })
+  --   vim.api.nvim_set_hl(0, "RenderMarkdownH6Bg", { bg = "NONE" })
+  --   -- Font
   vim.api.nvim_set_hl(0, "@markup.italic.markdown_inline", { fg = "#F4AFD2", bg = "None", italic = true })
   vim.api.nvim_set_hl(0, "@markup.strong.markdown_inline", { fg = "#F9215D", bg = "None", italic = true })
 end
 --
-set_markdown_highlights()
+-- set_markdown_highlights()
 
 return {
   "MeanderingProgrammer/render-markdown.nvim",
   dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
-  ft = { "markdown", "qmd", "quarto" },
+  ft = { "markdown", "qmd", "quarto", "md" },
   opts = {
     render_modes = true,
     heading = {
       enabled = true,
-      render_modes = false,
       atx = true,
       setext = true,
       sign = true,
+      signs = { "󰫎 " },
       -- icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
       icons = {},
       position = "inline",
-      signs = { "󰫎 " },
       width = "full",
       left_margin = 0,
       left_pad = 0,
       right_pad = 0,
       min_width = 0,
       border = false,
-      border_virtual = false,
+      border_virtual = true,
       border_prefix = false,
       above = "▄",
       below = "▀",
@@ -70,7 +69,14 @@ return {
       },
       custom = {},
     },
-
+    dash = {
+      enabled = true,
+      render_modes = false,
+      icon = "─",
+      width = "full",
+      left_margin = 0,
+      highlight = "RenderMarkdownDash",
+    },
     checkbox = {
       unchecked = { icon = " ", highlight = "RenderMarkdownH1" },
       checked = { icon = " ", highlight = "RenderMarkdownH2" },
@@ -78,7 +84,7 @@ return {
         followup = { raw = "[~]", rendered = "󰓎 ", highlight = "RenderMarkdownH6" },
         important = { raw = "[!]", rendered = " ", highlight = "RenderMarkdownH4" }, -- Exclamation mark icon
         pending = { raw = "[>]", rendered = "󰦕 ", highlight = "RenderMarkdownH3" },
-        question = { raw = "[?]", rendered = "󰋗",  highlight = "RenderMarkdownH2" },
+        question = { raw = "[?]", rendered = "󰋗", highlight = "RenderMarkdownH2" },
       },
     },
   },
