@@ -40,7 +40,11 @@ return {
     cmdline = {
       keymap = {
         preset = "inherit",
-        ["<CR>"] = { "select_accept_and_enter", "fallback" },
+        ["<CR>"] = { "fallback" },
+        ["<Tab>"] = {
+          "accept",
+          "fallback",
+        },
       },
       completion = { menu = { auto_show = true }, ghost_text = { enabled = true } },
     },

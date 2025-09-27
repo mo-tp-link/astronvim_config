@@ -32,4 +32,11 @@ return {
     priority = 1000,
     opts = {},
   },
+  {
+    'shaunsingh/nord.nvim',
+    name = 'nord',
+    lazy = false,
+    priority = 1000,
+    -- config = function() require("nordic").load() end,
+  },
 }
