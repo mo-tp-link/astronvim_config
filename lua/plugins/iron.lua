@@ -17,19 +17,19 @@ return {
           winfixheight = false,
         }),
 
-        -- Your repl definitions come here
+        -- your repl definitions come here
         repl_definition = {
           sh = {
-            -- Can be a table or a function that
+            -- can be a table or a function that
             -- returns a table (see below)
             command = { "zsh" },
           },
-          haskell = {
-            command = function(meta)
-              local filename = vim.api.nvim_buf_get_name(meta.current_bufnr)
-              return { "cabal", "v2-repl", filename }
-            end,
-          },
+          -- haskell = {
+          --   command = function(meta)
+          --     local filename = vim.api.nvim_buf_get_name(meta.current_bufnr)
+          --     return { "cabal", "v2-repl", filename }
+          --   end,
+          -- },
           python = {
             command = {
               "ipython",
