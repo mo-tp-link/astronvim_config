@@ -78,24 +78,18 @@ return {
       )
     end,
   },
-  -- {
-  --   "echasnovski/mini.indentscope",
-  --   branch = "stable",
-  --   -- event = { "BufReadPre" },
-  --   config = function() require("mini.indentscope").setup() end,
-  -- },
   {
     "echasnovski/mini.surround",
     version = "*",
     event = { "BufReadPre" },
     config = function() require("mini.surround").setup() end,
   },
-  -- {
-  --   "echasnovski/mini.trailspace",
-  --   branch = "stable",
-  --   event = { "BufEnter" },
-  --   config = function() require("mini.trailspace").setup() end,
-  -- },
+  {
+    "echasnovski/mini.trailspace",
+    branch = "stable",
+    event = { "BufEnter" },
+    config = function() require("mini.trailspace").setup() end,
+  },
   {
     "echasnovski/mini.move",
     branch = "stable",
@@ -132,8 +126,5 @@ return {
       "RainbowDelimQuoted",
       "RainbowMultiDelim",
     },
-  },
-  {
-    "tpope/vim-dadbod",
   },
 }

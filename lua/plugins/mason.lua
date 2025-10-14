@@ -27,8 +27,9 @@ return {
         "prettier",
 
         -- python
-        "black",
-        -- "jedi-language-server",
+
+        "ruff",
+        -- "black",
         -- "python-lsp-server",
         "pyright",
         -- "debugpy",

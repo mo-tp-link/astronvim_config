@@ -5,17 +5,20 @@ return {
     local iron = require "iron.core"
     local view = require "iron.view"
     local python_format = require("iron.fts.common").bracketed_paste_python
+
     iron.setup {
+
       config = {
-        scratch_repl = false,
+        scratch_repl = true,
         buflisted = true,
         close_on_exit = true,
         focus_on_send = false,
         repl_auto_scroll = true,
-        repl_open_cmd = view.split.vertical.botright("50%", {
-          winfixwidth = false,
-          winfixheight = false,
-        }),
+        repl_open_cmd = view.split.vertical.botright("40%"),
+        -- repl_open_cmd = view.split.vertical.botright("50%", {
+        --   winfixwidth = false,
+        --   winfixheight = false,
+        -- }),
 
         -- your repl definitions come here
         repl_definition = {

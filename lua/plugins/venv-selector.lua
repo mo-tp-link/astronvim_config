@@ -1,6 +1,6 @@
 return {
   "linux-cultist/venv-selector.nvim",
-  enabled=false,
+  enabled = false,
   lazy = true,
   dependencies = {
     "neovim/nvim-lspconfig",
