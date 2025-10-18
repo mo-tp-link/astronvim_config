@@ -24,7 +24,7 @@ local function set_markdown_highlights()
   vim.api.nvim_set_hl(0, "@markup.strong.markdown_inline", { fg = "#F9215D", bg = "None", italic = true })
 end
 --
--- set_markdown_highlights()
+set_markdown_highlights()
 
 return {
   "MeanderingProgrammer/render-markdown.nvim",

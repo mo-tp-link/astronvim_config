@@ -10,7 +10,7 @@ return {
   opts = {
     -- Configuration table of features provided by AstroLSP
     features = {
-      codelens = true, -- enable/disable codelens refresh on start
+      codelens = false, -- enable/disable codelens refresh on start
       inlay_hints = false, -- enable/disable inlay hints on start
       semantic_tokens = true, -- enable/disable semantic token highlighting
     },
@@ -21,7 +21,7 @@ return {
         enabled = false, -- enable or disable format on save globally
         allow_filetypes = { -- enable format on save for specified filetypes only
           -- "go",
-          "python",
+          -- "python",
         },
         ignore_filetypes = { -- disable format on save for specified filetypes
           -- "python",
@@ -39,7 +39,7 @@ return {
     },
     -- enable servers that you already have installed without mason
     servers = {
-      "pyright",
+      -- "pyright",
       -- "ruff",
     },
     -- customize language server configuration options passed to `lspconfig`
@@ -53,11 +53,11 @@ return {
           pyright = {
             disableOrganizeImports = true,
           },
-          -- python = {
-          --   analysis = {
-          --     ignore = { "*" },
-          --   },
-          -- },
+          python = {
+            analysis = {
+              ignore = { "*" },
+            },
+          },
         },
       },
     },
