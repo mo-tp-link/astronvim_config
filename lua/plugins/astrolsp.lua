@@ -12,7 +12,8 @@ return {
     features = {
       codelens = false, -- enable/disable codelens refresh on start
       inlay_hints = false, -- enable/disable inlay hints on start
-      semantic_tokens = true, -- enable/disable semantic token highlighting
+      semantic_tokens = false, -- enable/disable semantic token highlighting
+      signature_help = false,
     },
     -- customize lsp formatting options
     formatting = {
@@ -21,7 +22,7 @@ return {
         enabled = false, -- enable or disable format on save globally
         allow_filetypes = { -- enable format on save for specified filetypes only
           -- "go",
-          -- "python",
+          "python",
         },
         ignore_filetypes = { -- disable format on save for specified filetypes
           -- "python",
@@ -30,7 +31,7 @@ return {
       disabled = { -- disable formatting capabilities for the listed language servers
         -- disable lua_ls formatting capability if you want to use StyLua to format your lua code
         -- "lua_ls",
-        "pyright",
+        -- "pyright",
       },
       timeout_ms = 3200, -- default format timeout
       -- filter = function(client) -- fully override the default formatting function
@@ -70,6 +71,27 @@ return {
       -- rust_analyzer = false, -- setting a handler to false will disable the set up of that language server
       -- pyright = function(_, opts) require("lspconfig").pyright.setup(opts) end, -- or a custom handler function can be passed
       -- ruff = function(_, opts) require("lspconfig").ruff.setup(opts) end,
+      pyright = function(_, opts)
+        -- Try to detect .venv created by uv or venv
+        local cwd = vim.fn.getcwd()
+        local venv_python = cwd .. "/.venv/bin/python"
+
+        if vim.fn.executable(venv_python) == 1 then
+          opts.settings = opts.settings or {}
+          opts.settings.python = opts.settings.python or {}
+          opts.settings.python.pythonPath = venv_python
+          vim.g.python3_host_prog = venv_python
+        else
+          vim.notify("No .venv found for Pyright, using system Python", vim.log.levels.WARN)
+        end
+
+        require("lspconfig").pyright.setup(opts)
+      end,
+
+      ruff = function(_, opts)
+        -- Ruff doesn’t need pythonPath, but good to ensure it uses same root
+        require("lspconfig").ruff.setup(opts)
+      end,
     },
     -- A custom `on_attach` function to be run after the default `on_attach` function
     -- takes two parameters `client` and `bufnr`  (`:h lspconfig-setup`)
