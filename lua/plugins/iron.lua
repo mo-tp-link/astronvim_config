@@ -45,7 +45,7 @@ return {
           --   block_deviders = { "# %%", "#%%" },
           -- },
           quarto = {
-            command = { "ipython", "--no-autoindent" },
+            command = {"uv", "run", 'ipython', "--no-autoindent"},
             format = python_format,
             block_dividers = { "# %%", "#%%" },
           },

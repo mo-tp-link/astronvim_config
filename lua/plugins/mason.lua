@@ -27,11 +27,12 @@ return {
         "prettier",
 
         -- python
+        "ty",
 
-        "ruff",
+        -- "ruff",
         -- "black",
         -- "python-lsp-server",
-        "pyright",
+        -- "pyright",
         -- "debugpy",
         -- install any other package
         "tree-sitter-cli",
