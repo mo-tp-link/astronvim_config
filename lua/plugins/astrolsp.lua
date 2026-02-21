@@ -49,6 +49,8 @@ return {
             disableOrganizeImports = true, -- 交给 Ruff
           },
           python = {
+            pythonPath = vim.fn.getcwd() .. "/.venv/bin/python",
+
             analysis = {
               autoSearchPaths = true,
               useLibraryCodeForTypes = true,
@@ -63,7 +65,6 @@ return {
               "dist",
               ".git",
             },
-            -- 注意：这里不要写死 venvPath，交由下方的 on_new_config 动态注入
           },
         },
       },
@@ -90,10 +91,7 @@ return {
       },
     },
     handlers = {
-      pyright = function(_, opts)
-        opts.settings.python.pythonPath = vim.fn.getcwd() .. "/.venv/bin/python"
-        require("lspconfig").pyright.setup(opts)
-      end,
+      pyright = function(_, opts) require("lspconfig").pyright.setup(opts) end,
 
       -- ty 需要手动注册（lspconfig 尚无内置定义）
       -- AstroLSP 会自动从 config.ty 生成 lspconfig.configs.ty，然后调用 setup
