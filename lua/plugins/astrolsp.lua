@@ -1,142 +1,132 @@
 -- AstroLSP allows you to customize the features in AstroNvim's LSP configuration engine
 -- Configuration documentation can be found with `:h astrolsp`
--- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
---       as this provides autocomplete and documentation while editing
 
 ---@type LazySpec
 return {
   "AstroNvim/astrolsp",
   ---@type AstroLSPOpts
   opts = {
-    -- Configuration table of features provided by AstroLSP
     features = {
-      codelens = false, -- enable/disable codelens refresh on start
-      inlay_hints = true, -- enable/disable inlay hints on start
-      semantic_tokens = true, -- enable/disable semantic token highlighting
+      codelens = false,
+      inlay_hints = true, -- ty 提供类型 inlay hints
+      semantic_tokens = false,
       signature_help = true,
     },
-    -- customize lsp formatting options
     formatting = {
-      -- control auto formatting on save
       format_on_save = {
-        -- enabled = true, -- enable or disable format on save globally
-        allow_filetypes = { -- enable format on save for specified filetypes only
-          -- "go",
-          "python",
-        },
-        ignore_filetypes = { -- disable format on save for specified filetypes
-          -- "python",
-        },
+        allow_filetypes = { "python" }, -- 只有 ruff 负责格式化
       },
-      disabled = { -- disable formatting capabilities for the listed language servers
-        -- disable lua_ls formatting capability if you want to use StyLua to format your lua code
-        -- "lua_ls",
-        "pyright",
-      },
-      timeout_ms = 3200, -- default format timeout
-      -- filter = function(client) -- fully override the default formatting function
-      --   return true
-      -- end
+      disabled = { "pyright", "ty" }, -- ty 不格式化，明确禁用
+      timeout_ms = 3200,
     },
-    -- enable servers that you already have installed without mason
+    -- ty 不在 mason-lspconfig 映射里，需要手动声明
     servers = {
-      "ty",
-      -- "pyright",
-      -- "ruff",
+      --"ty"
     },
-    -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
-      -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
       marksman = { filetypes = { "markdown", "quarto", "qmd" } },
-      ty = {
-        cmd = { "ty", "server" },
-        filetypes = { "python" },
-        root_dir = function(fname)
-          return require("lspconfig.util").root_pattern("ty.toml", "pyproject.toml", "setup.py", "setup.cfg", ".git")(fname)
-        end,
-        single_file_support = true,
+
+      -- ── ty：类型检查 + 语言服务（hover / goto-def / refs / completions）──
+      -- ty = {
+      --
+      --   cmd = { "ty", "server" },
+      --   filetypes = { "python" },
+      --   -- root_markers = { "ty.toml", "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git" },
+      --   root_dir = function(fname)
+      --     return require("lspconfig.util").root_pattern("ty.toml", "pyproject.toml", "setup.py", "setup.cfg", ".git")(
+      --       fname
+      --     )
+      --   end,
+      -- },
+
+      -- ── ruff：lint + 格式化（black + isort 替代品）──
+      -- 注意：ruff 用 init_options.settings，不是顶层 settings
+      pyright = {
+        -- 1. 严格遵守 Pyright 规范，必须包在 settings 里面
+        settings = {
+          pyright = {
+            disableOrganizeImports = true, -- 交给 Ruff
+          },
+          python = {
+            analysis = {
+              autoSearchPaths = true,
+              useLibraryCodeForTypes = true,
+              diagnosticMode = "openFilesOnly",
+            },
+            exclude = {
+              "**/node_modules",
+              "**/__pycache__",
+              ".venv",
+              "venv",
+              "build",
+              "dist",
+              ".git",
+            },
+            -- 注意：这里不要写死 venvPath，交由下方的 on_new_config 动态注入
+          },
+        },
       },
       ruff = {
         settings = {
-
-          organizeImports = true,
-          fixAll = true,
           lineLength = 88,
+          organizeImports = true, -- 启用 source.organizeImports.ruff
+          fixAll = true, -- 启用 source.fixAll.ruff
           lint = {
             enable = true,
-
-            select = { "E", "F", "UP" },
+            select = {
+              "E", -- pycodestyle errors
+              "F", -- pyflakes（未使用变量/import）
+              "UP", -- pyupgrade（自动升级旧语法）
+              "I", -- isort（import 排序）
+              "N", -- pep8-naming
+              "B", -- flake8-bugbear（常见 bug 模式）
+              "SIM", -- flake8-simplify（简化冗余代码）
+              "RUF", -- ruff 专属规则
+            },
+            unsafeFixes = true, -- 允许修复 RUF002 等 unsafe fix 规则
           },
         },
       },
-      -- pyright = {
-      --   enable = false,
-      --
-      --   --     settings = {
-      --   --       pyright = {
-      --   --         disableOrganizeImports = true,
-      --   --       },
-      --   --       python = {
-      --   --         analysis = {
-      --   --           -- ignore = { "*" },
-      --   --           autoSearchPaths = true,
-      --   --           diagnosticMode = "openFilesOnly",
-      --   --           useLibraryCodeForTypes = true,
-      --   --         },
-      --   --       },
-      --   --     },
-      -- },
     },
-    -- customize how language servers are attached
     handlers = {
-      -- a function without a key is simply the default handler, functions take two parameters, the server name and the configured options table for that server
-      -- function(server, opts) require("lspconfig")[server].setup(opts) end
+      pyright = function(_, opts)
+        opts.settings.python.pythonPath = vim.fn.getcwd() .. "/.venv/bin/python"
+        require("lspconfig").pyright.setup(opts)
+      end,
 
-      -- the key is the server that is being setup with `lspconfig`
-      -- rust_analyzer = false, -- setting a handler to false will disable the set up of that language server
-      -- pyright = function(_, opts) require("lspconfig").pyright.setup(opts) end, -- or a custom handler function can be passed
-      -- ruff = function(_, opts) require("lspconfig").ruff.setup(opts) end,
-      pyright = false,
-      -- pyright = function(_, opts)
-      --   -- local cwd = vim.fn.getcwd()
-      --   -- local venv_dir = cwd .. "/.venv"
+      -- ty 需要手动注册（lspconfig 尚无内置定义）
+      -- AstroLSP 会自动从 config.ty 生成 lspconfig.configs.ty，然后调用 setup
+      -- ty = function(_, opts)
+      --   opts.init_options = {
+      --     logLevel = "warn",
       --
-      --   --   if vim.fn.isdirectory(venv_dir) == 1 then
-      --   --     opts.settings = opts.settings or {}
-      --   --     opts.settings.python = opts.settings.python or {}
+      --     showSyntaxErrors = true,
+      --     disableLanguageServices = true,
+      --     single_file_support = true,
+      --     diagnosticMode = "openFilesOnly",
+      --   }
       --
-      --   --     opts.settings.python.venvPath = cwd
-      --   --     opts.settings.python.venv = ".venv"
-      --
-      --   --     vim.notify("Pyright using .venv from project", vim.log.levels.INFO)
-      --   --   else
-      --   --     vim.notify("No .venv found, using system Python", vim.log.levels.WARN)
-      --   --   end
-      --   --
-      --   require("lspconfig").pyright.setup(opts)
+      --   require("lspconfig").ty.setup(opts)
       -- end,
-      ty = function(_, opts) require("lspconfig").ty.setup(opts) end,
+      -- ruff handler 精简，settings 统一放在 config.ruff.init_options 里
       ruff = function(_, opts)
-        -- Ruff LSP 设置
         opts.init_options = {
           settings = {
-            configuration = {
-              format = {
-                ["quote-style"] = "single",
-              },
+            format = {
+              ["quote-style"] = "double",
+              ["indent-style"] = "space",
+              ["line-ending"] = "auto",
             },
           },
         }
+
         require("lspconfig").ruff.setup(opts)
       end,
     },
-    -- A custom `on_attach` function to be run after the default `on_attach` function
-    -- takes two parameters `client` and `bufnr`  (`:h lspconfig-setup`)
     on_attach = function(client, bufnr)
-      -- this would disable semanticTokensProvider for all clients
-      -- client.server_capabilities.semanticTokensProvider = nil
-      if client.name == "ruff" then client.server_capabilities.colorProvider = false end
+      -- ruff 不提供 hover（由 ty 负责），禁用避免冲突
+      if client.name == "ruff" then client.server_capabilities.hoverProvider = false end
     end,
   },
 }
