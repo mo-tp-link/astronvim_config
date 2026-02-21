@@ -35,7 +35,7 @@ return {
           --   end,
           -- },
           python = {
-            command = {"uv", "run", 'ipython', "--no-autoindent"},
+            command = { "uv", "run", "--with", "ipython", "ipython", "--no-autoindent" },
             format = python_format,
             block_dividers = { "# %%", "#%%" },
           },
@@ -45,7 +45,7 @@ return {
           --   block_deviders = { "# %%", "#%%" },
           -- },
           quarto = {
-            command = {"uv", "run", 'ipython', "--no-autoindent"},
+            command = { "uv", "run", "--with", "ipython", "ipython", "--no-autoindent" },
             format = python_format,
             block_dividers = { "# %%", "#%%" },
           },
