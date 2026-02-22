@@ -33,6 +33,7 @@ return {
         -- "black",
         -- "python-lsp-server",
         "pyright",
+        "zuban",
         -- "debugpy",
         -- install any other package
         "tree-sitter-cli",

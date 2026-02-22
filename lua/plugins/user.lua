@@ -72,6 +72,24 @@ return {
             :with_del(cond.not_after_regex "xx")
             -- disable adding a newline when you press <cr>
             :with_cr(cond.none()),
+
+          -- specify a list of rules to add
+          Rule(" ", " "):with_pair(function(options)
+            local pair = options.line:sub(options.col - 1, options.col)
+            return vim.tbl_contains({ "()", "[]", "{}" }, pair)
+          end),
+          Rule("( ", " )")
+            :with_pair(function() return false end)
+            :with_move(function(options) return options.prev_char:match ".%)" ~= nil end)
+            :use_key ")",
+          Rule("{ ", " }")
+            :with_pair(function() return false end)
+            :with_move(function(options) return options.prev_char:match ".%}" ~= nil end)
+            :use_key "}",
+          Rule("[ ", " ]")
+            :with_pair(function() return false end)
+            :with_move(function(options) return options.prev_char:match ".%]" ~= nil end)
+            :use_key "]",
         },
         -- disable for .vim files, but it work for another filetypes
         Rule("a", "a", "-vim")
@@ -127,5 +145,4 @@ return {
       "RainbowMultiDelim",
     },
   },
-
 }

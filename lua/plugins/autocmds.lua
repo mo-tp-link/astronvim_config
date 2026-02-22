@@ -20,6 +20,7 @@ return {
             end,
           },
         },
+
         file_type_settings = {
           ft = { "markdown" },
           callback = function()
@@ -43,7 +44,7 @@ return {
     "AstroNvim/astrolsp",
     ---@type AstroLSPOpts
     opts = {
-      automcds = {
+      autocmds = {
         -- these autocommands will only be created in buffers where
         -- a language servers attaches
         lsp_codelens_refresh = {
@@ -79,6 +80,21 @@ return {
             callback = function() vim.lsp.buf.clear_references() end,
           },
         },
+        -- lsp_attach_disable_ruff_hover = {
+        --   检查Ruff文档，作为对应使用
+        --   {
+        --     event = "LspAttach",
+        --     desc = "LSP: Disable hover capability from Ruff",
+        --     callback = function(args)
+        --       local client = vim.lsp.get_client_by_id(args.data.client_id)
+        --       if client == nil then return end
+        --       if client.name == "ruff" then
+        --         -- Disable hover in favor of Pyright
+        --         client.server_capabilities.hoverProvider = false
+        --       end
+        --     end,
+        --   },
+        -- },
       },
     },
   },
