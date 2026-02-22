@@ -26,7 +26,7 @@ return {
     },
     ---@diagnostic disable: missing-fields
     config = {
-      -- INFO: 各家config都不一样 具体取决于doc
+      --WARN: 各家config都不一样 具体取决于doc
       marksman = { filetypes = { "markdown", "quarto", "qmd" } },
       ty = {
         -- enabled = false,
